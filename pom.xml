@@ -14,13 +14,14 @@
         <selenium.java.version>3.141.59</selenium.java.version>
         <junit.version>5.8.1</junit.version>
         <faker.version>1.0.1</faker.version>
+        <cucumber.version>5.5.0</cucumber.version>
+        <inject.version>5.1.0</inject.version>
 
         <forkCount>1</forkCount>
         <reuseForks>true</reuseForks>
 
         <browser>chrome</browser>
         <webdriver.base.url>https://otus.ru</webdriver.base.url>
-        <webdriver.close.on.tear.down>true</webdriver.close.on.tear.down>
         <test.project.language>RU</test.project.language>
 
         <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
@@ -58,6 +59,26 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-guice</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${inject.version}</version>
         </dependency>
     </dependencies>
 

@@ -20,17 +20,17 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class BannersCourses extends BaseComponentAbs {
+public class CatalogCourses extends BaseComponentAbs {
     private WebElement currentBunner;
     @FindBy(xpath = "//a[@href and contains(@class, 'lessons')]")
     private List<WebElement> listBanner;
 
     @Inject
-    public BannersCourses(GuiceScoped guiceScoped) {
+    public CatalogCourses(GuiceScoped guiceScoped) {
         super(guiceScoped);
     }
 
-    public BannersCourses selectCourseByTitle(String title) {
+    public CatalogCourses selectCourseByTitle(String title) {
         List<WebElement> listBanners = listBanner.stream()
                 .filter(x -> getTitle(x).contains(title))
                 .collect(Collectors.toList());
@@ -55,7 +55,7 @@ public class BannersCourses extends BaseComponentAbs {
         map.forEach((key, value) -> System.out.printf("Курс %s, дата начала %s%n", key, value.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))));
     }
 
-    public BannersCourses selectCourseWithMaxDateBegin() {
+    public CatalogCourses selectCourseWithMaxDateBegin() {
         currentBunner = listBanner.stream()
                 .filter(x -> getDateBegin(x) != null)
                 .reduce((p1, p2) -> {
@@ -67,7 +67,7 @@ public class BannersCourses extends BaseComponentAbs {
         return this;
     }
 
-    public BannersCourses selectCourseWithMinDateBegin() {
+    public CatalogCourses selectCourseWithMinDateBegin() {
         currentBunner = listBanner.stream()
                 .filter(x -> getDateBegin(x) != null)
                 .reduce((p1, p2) -> {

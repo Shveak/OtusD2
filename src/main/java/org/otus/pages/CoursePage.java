@@ -1,18 +1,11 @@
 package org.otus.pages;
 
-import org.openqa.selenium.WebDriver;
+import com.google.inject.Inject;
+import org.otus.support.GuiceScoped;
 
 public class CoursePage extends BasePageAbs {
-    public CoursePage(WebDriver driver) {
-        super(driver);
+    @Inject
+    public CoursePage(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
-
-    public String getTitle() {
-        return driver.getTitle();
-    }
-
-    public String getUrl() {
-        return driver.getCurrentUrl();
-    }
-
 }

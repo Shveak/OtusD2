@@ -1,15 +1,22 @@
 package org.otus.pages;
 
-import org.openqa.selenium.WebDriver;
-import org.otus.actions.Action;
+import com.google.inject.Inject;
+import org.otus.objects.PageObjectAbs;
+import org.otus.support.GuiceScoped;
 
-public abstract class BasePageAbs extends Action {
+public abstract class BasePageAbs extends PageObjectAbs {
 
-    public BasePageAbs(WebDriver driver) {
-        super(driver);
+    @Inject
+    public BasePageAbs(GuiceScoped guiceScoped) {
+        super(guiceScoped);
     }
 
     public void open(String url) {
-        driver.get(url);
+        guiceScoped.driver.get(url);
+    }
+
+    public String getTitle() {
+        System.out.printf("Заголовок текущей страницы %s", guiceScoped.driver.getTitle());
+        return guiceScoped.driver.getTitle();
     }
 }
