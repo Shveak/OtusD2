@@ -10,7 +10,7 @@ public class Hooks {
 
     @After
     public void after() {
-        if (guiceScoped.driver != null && false) {
+        if (guiceScoped.driver != null) {
             guiceScoped.driver.close();
             guiceScoped.driver.quit();
         }
