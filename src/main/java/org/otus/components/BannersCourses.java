@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.otus.data.Month;
 import org.otus.pages.CoursePage;
 import org.otus.support.GuiceScoped;
 
@@ -18,7 +19,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BannersCourses extends BaseComponentAbs {
     private WebElement currentBunner;
@@ -31,6 +31,7 @@ public class BannersCourses extends BaseComponentAbs {
     }
 
     public BannersCourses selectCourseByTitle(String title) {
+        System.out.println("----------------------------------------------------------------------");
         List<WebElement> listBanners = listBanner.stream()
                 .filter(x -> getTitle(x).contains(title))
                 .collect(Collectors.toList());
@@ -41,10 +42,12 @@ public class BannersCourses extends BaseComponentAbs {
         }
         currentBunner = listBanners.get(numberCourse);
         System.out.printf("Выбран баннер с названием курса %s, с датой начала %s%n", getTitleCurrentBanner(), getDateBeginCurrentBanner());
+        System.out.println("----------------------------------------------------------------------");
         return this;
     }
 
     public void selectCourseWithDateStartAfter(String dateStart) {
+        System.out.println("----------------------------------------------------------------------");
         LocalDate localDate = LocalDate.parse(dateStart, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         Map<String, LocalDate> map = listBanner.stream()
                 .filter(x -> getDateBegin(x) != null)
@@ -53,6 +56,7 @@ public class BannersCourses extends BaseComponentAbs {
         Assertions.assertFalse(listBanner.isEmpty(), String.format("Не найдены баннеры с началом курса после %s", dateStart));
         System.out.printf("Список курсов, с датой начала больше %s%n", dateStart);
         map.forEach((key, value) -> System.out.printf("Курс %s, дата начала %s%n", key, value.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))));
+        System.out.println("----------------------------------------------------------------------");
     }
 
     public BannersCourses selectCourseWithMaxDateBegin() {
@@ -158,43 +162,5 @@ public class BannersCourses extends BaseComponentAbs {
         matcher = pattern.matcher(str);
         str = matcher.find() ? "1 " + matcher.group(1) + " " + matcher.group(2) : str + " " + LocalDate.now().getYear();
         return str;
-    }
-
-    private enum Month {
-        ЯНВАРЬ("1", "январ"),
-        ФЕВРАЛЬ("2", "феврал"),
-        МАРТ("3", "март"),
-        АПРЕЛЬ("4", "апрел"),
-        МАЙ("5", "мая"),
-        ИЮНЬ("6", "июн"),
-        ИЮЛЬ("7", "июл"),
-        АВГУСТ("8", "август"),
-        СЕНТЯБРЬ("9", "сентябр"),
-        ОКТЯБРЬ("10", "октябр"),
-        НОЯБРЬ("11", "ноябр"),
-        ДЕКАБРЬ("12", "декабр");
-
-        final String number;
-        final String loName;
-
-        Month(String number, String loName) {
-            this.number = number;
-            this.loName = loName;
-        }
-
-        public String getLoName() {
-            return this.loName;
-        }
-
-        public String getNumber() {
-            return this.number;
-        }
-
-        public static Month of(String loName) {
-            return Stream.of(Month.values())
-                    .filter(x -> loName.contains(x.getLoName()))
-                    .findFirst()
-                    .orElseThrow(() -> new AssertionError(String.format("Не найден месяц по %s", loName)));
-        }
     }
 }

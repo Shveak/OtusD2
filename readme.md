@@ -1,3 +1,3 @@
 запуск:
 
-mvn clean test -Dtest=CourseOnMainPage
+mvn clean test

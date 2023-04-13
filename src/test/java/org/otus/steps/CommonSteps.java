@@ -12,7 +12,7 @@ public class CommonSteps {
     @Inject
     private MainPage mainPage;
 
-    @Пусть("^Я открываю главную старницу (.*) в браузере (.*)$")
+    @Пусть("^Я открываю страницу (.*) в браузере (.*)$")
     public void openMainPage(String url, String browser) {
         guiceScoped.driver = new WebDriverFactory().getDriver(browser);
         mainPage.open(url);

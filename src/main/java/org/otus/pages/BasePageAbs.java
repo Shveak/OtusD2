@@ -16,7 +16,7 @@ public abstract class BasePageAbs extends PageObjectAbs {
     }
 
     public String getTitle() {
-        System.out.printf("Заголовок текущей страницы %s", guiceScoped.driver.getTitle());
+        System.out.printf("Заголовок текущей страницы %s%n", guiceScoped.driver.getTitle());
         return guiceScoped.driver.getTitle();
     }
 }
